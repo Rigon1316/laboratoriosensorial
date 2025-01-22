@@ -1,0 +1,174 @@
+  <h2>Lista de Pacientes</h2>
+
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+
+
+  <div *ngIf="pacientes.length > 0">
+    <app-table
+    [data]="pacientes"
+    [columns]="[
+    { header: 'Número de Ficha', key: 'numeroFicha' },
+    { header: 'Nombres y Apellidos', key: 'nombresApellidos' },
+    { header: 'Lugar y Fecha de Nacimiento', key: 'lugarFechaNacimiento' },
+    { header: 'Edad', key: 'edad' },
+    { header: 'Escolarizado', key: 'escolarizado' }
+  ]"
+    [showEdit]="true"
+    [showDelete]="true"
+    [showView]="true"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 20]"
+    (onEdit)="verInformacion($event)"
+    (onDelete)="eliminarPaciente($event)"
+    (onView)="verHistoriaClinica($event.numeroFicha)"
+  ></app-table>
+
+  </div>
+
+  <p *ngIf="pacientes.length === 0 && !error">No hay pacientes disponibles.</p>
+
+  <!-- Modal para información del paciente -->
+  <div *ngIf="mostrarModal" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="cerrarModal()">&times;</span>
+      <h3>Información del Paciente</h3>
+      <div class="modal-body">
+        <p><strong>Número de Ficha:</strong> {{ pacienteSeleccionado?.numeroFicha }}</p>
+        <p><strong>Nombres y Apellidos:</strong> {{ pacienteSeleccionado?.nombresApellidos }}</p>
+        <p><strong>Lugar y Fecha de Nacimiento:</strong> {{ pacienteSeleccionado?.lugarFechaNacimiento }}</p>
+        <p><strong>Edad:</strong> {{ pacienteSeleccionado?.edad }}</p>
+        <p><strong>Escolarizado:</strong> {{ pacienteSeleccionado?.escolarizado ? 'Sí' : 'No' }}</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" (click)="cerrarModal()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+<!-- Modal para editar y visualizar la historia clínica con navegación por pestañas -->
+<div *ngIf="mostrarModalHistoriaClinica" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="cerrarModalHistoriaClinica()">&times;</span>
+    <h3>Historia Clínica</h3>
+
+    <!-- Navegación por pestañas -->
+    <div class="navigation">
+      <button class="tab-button" (click)="cambiarSeccion('datosBasicos')" [class.active]="currentSection === 'datosBasicos'">Datos Básicos</button>
+      <button class="tab-button" (click)="cambiarSeccion('historiaPrenatal')" [class.active]="currentSection === 'historiaPrenatal'">Historia Prenatal</button>
+      <button class="tab-button" (click)="cambiarSeccion('historiaPerinatal')" [class.active]="currentSection === 'historiaPerinatal'">Historia Perinatal</button>
+      <button class="tab-button" (click)="cambiarSeccion('desarrolloPosnatal')" [class.active]="currentSection === 'desarrolloPosnatal'">Desarrollo Posnatal</button>
+      <button class="tab-button" (click)="cambiarSeccion('tratamientosFarmacologicos')" [class.active]="currentSection === 'tratamientosFarmacologicos'">Tratamientos Farmacológicos</button>
+    </div>
+
+    <!-- Contenido de cada pestaña -->
+    <form *ngIf="historiaClinicaSeleccionada" (ngSubmit)="guardarHistoriaClinica()">
+      <!-- Datos Básicos -->
+      <div *ngIf="currentSection === 'datosBasicos'">
+        <h4>Datos Básicos</h4>
+        <div class="form-group">
+          <label>Número de Ficha:</label>
+          <input [(ngModel)]="historiaClinicaSeleccionada.numeroFicha" type="text" readonly name="numeroFicha">
+        </div>
+        <div class="form-group">
+          <label>Enfermedades Tratamiento:</label>
+          <input [(ngModel)]="historiaClinicaSeleccionada.enfermedadesTratamiento" type="checkbox" name="enfermedadesTratamiento">
+        </div>
+        <div class="form-group">
+          <label>Descripción Enfermedades:</label>
+          <textarea [(ngModel)]="historiaClinicaSeleccionada.descripcionEnfermedades" name="descripcionEnfermedades"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Alergias:</label>
+          <input [(ngModel)]="historiaClinicaSeleccionada.alergias" type="checkbox" name="alergias">
+        </div>
+        <div class="form-group">
+          <label>Descripción Alergias:</label>
+          <textarea [(ngModel)]="historiaClinicaSeleccionada.descripcionAlergias" name="descripcionAlergias"></textarea>
+        </div>
+      </div>
+
+      <!-- Historia Prenatal -->
+      <div *ngIf="currentSection === 'historiaPrenatal'">
+        <h4>Historia Prenatal</h4>
+        <div class="form-group">
+          <label>Desarrollo Prenatal:</label>
+          <textarea [(ngModel)]="historiaClinicaSeleccionada.desarrolloPrenatal" name="desarrolloPrenatal"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Embarazo Deseado:</label>
+          <input [(ngModel)]="historiaClinicaSeleccionada.embarazoDeseado" type="checkbox" name="embarazoDeseado">
+        </div>
+        <div class="form-group">
+          <label>Control Embarazo:</label>
+          <input [(ngModel)]="historiaClinicaSeleccionada.controlEmbarazo" type="checkbox" name="controlEmbarazo">
+        </div>
+      </div>
+
+      <!-- Historia Perinatal -->
+      <div *ngIf="currentSection === 'historiaPerinatal'">
+        <h4>Historia Perinatal</h4>
+        <div class="form-group">
+          <label>Desarrollo Perinatal:</label>
+          <textarea [(ngModel)]="historiaClinicaSeleccionada.desarrolloPerinatal" name="desarrolloPerinatal"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Lugar de Nacimiento:</label>
+          <input [(ngModel)]="historiaClinicaSeleccionada.lugarNacimiento" type="text" name="lugarNacimiento">
+        </div>
+        <div class="form-group">
+          <label>Duración del Embarazo:</label>
+          <input [(ngModel)]="historiaClinicaSeleccionada.duracionEmbarazo" type="text" name="duracionEmbarazo">
+        </div>
+      </div>
+
+      <!-- Desarrollo Posnatal -->
+      <div *ngIf="currentSection === 'desarrolloPosnatal'">
+        <h4>Desarrollo Posnatal</h4>
+        <div class="form-group">
+          <label>Habilidades Motoras:</label>
+          <textarea [(ngModel)]="historiaClinicaSeleccionada.habilidadesMotoras" name="habilidadesMotoras"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Habilidades Lenguaje:</label>
+          <textarea [(ngModel)]="historiaClinicaSeleccionada.habilidadesLenguaje" name="habilidadesLenguaje"></textarea>
+        </div>
+      </div>
+
+      <!-- Tratamientos Farmacológicos -->
+      <div *ngIf="currentSection === 'tratamientosFarmacologicos'">
+        <h4>Tratamientos Farmacológicos</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Medicamento</th>
+              <th>Dosis</th>
+              <th>Frecuencia</th>
+              <th>Vía de Administración</th>
+              <th>Observaciones</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tratamiento of historiaClinicaSeleccionada?.tratamientosFarmacologicos; let i = index">
+              <td><input type="text" [(ngModel)]="tratamiento.medicamento" [name]="'medicamento' + i"></td>
+              <td><input type="text" [(ngModel)]="tratamiento.dosis" [name]="'dosis' + i"></td>
+              <td><input type="text" [(ngModel)]="tratamiento.frecuencia" [name]="'frecuencia' + i"></td>
+              <td><input type="text" [(ngModel)]="tratamiento.viaAdministracion" [name]="'viaAdministracion' + i"></td>
+              <td><input type="text" [(ngModel)]="tratamiento.observaciones" [name]="'observaciones' + i"></td>
+              <td><button type="button" (click)="eliminarTratamiento(i)">Eliminar</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="button" (click)="agregarTratamiento()">Agregar Tratamiento</button>
+      </div>
+
+      <!-- Acciones del modal -->
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="button" class="btn btn-secondary" (click)="cerrarModalHistoriaClinica()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+

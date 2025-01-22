@@ -1,0 +1,51 @@
+<h2 class="page-title">Lista de Asignaciones</h2>
+
+<!-- Mostrar error si ocurre -->
+<div *ngIf="error" class="error-message">
+  {{ error }}
+</div>
+
+<!-- Tabla de asignaciones -->
+<!-- <table *ngIf="asignaciones.length > 0" class="asignaciones-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Número de Ficha</th>
+      <th>Cédula del Profesional</th>
+      <th>Fecha de Asignación</th>
+      <th *ngIf="esAdmin">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let asignacion of asignaciones">
+      <td>{{ asignacion.id }}</td>
+      <td>{{ asignacion.numeroFicha }}</td>
+      <td>{{ asignacion.cedulaProfesional }}</td>
+      <td>{{ asignacion.fechaAsignacion | date: 'medium' }}</td>
+      <td *ngIf="esAdmin">
+        <button (click)="eliminarAsignacion(asignacion.id)" class="btn btn-danger">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table> -->
+
+<div *ngIf="asignaciones.length > 0">
+  <app-table
+  [data]="asignaciones"
+  [columns]="[
+    { header: 'ID', key: 'id' },
+    { header: 'Número de Ficha', key: 'numeroFicha' },
+    { header: 'Cédula del Profesional', key: 'cedulaProfesional' },
+    { header: 'Fecha de Asignación', key: 'fechaAsignacion' }
+]"
+  [showDelete]="esAdmin"
+  [pageSize]="10"
+  [pageSizeOptions]="[5, 10, 20]"
+  (onDelete)="eliminarAsignacion($event)"
+></app-table>
+
+
+</div>
+
+<!-- Mensaje si no hay asignaciones -->
+<p *ngIf="asignaciones.length === 0 && !error" class="no-data">No hay asignaciones disponibles.</p>

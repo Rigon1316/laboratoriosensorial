@@ -1,0 +1,99 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fefefe;
+  color: #333;
+}
+
+.main-title {
+  font-size: 2.8rem;
+  text-align: center;
+  margin: 20px auto;
+  color: #b71c1c;
+  font-weight: bold;
+  max-width: 800px;
+  border-bottom: 4px solid #e53935;
+  padding-bottom: 15px;
+}
+
+.content-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 40px;
+}
+
+.info {
+  flex: 1;
+  min-width: 300px;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s;
+}
+
+.info:hover {
+  transform: translateY(-10px);
+}
+
+.section-title {
+  font-size: 1.8rem;
+  color: #d32f2f;
+  margin-bottom: 20px;
+  text-align: center;
+  border-bottom: 2px solid #e53935;
+  padding-bottom: 10px;
+}
+
+.section-text {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #424242;
+  text-align: justify;
+}
+
+.objectives-section, .values-section, .areas-section {
+  margin: 20px 40px;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.objectives-list, .values-list, .areas-list {
+  list-style: none;
+  padding: 0;
+  font-size: 1.2rem;
+  color: #424242;
+}
+
+.objectives-list li, .values-list li, .areas-list li {
+  margin-bottom: 15px;
+  padding-left: 25px;
+  position: relative;
+}
+
+.objectives-list li:before, .values-list li:before, .areas-list li:before {
+  content: "\2022";
+  color: #e53935;
+  font-size: 1.5rem;
+  display: inline-block;
+  width: 1.5em;
+  margin-left: -1.5em;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #b71c1c;
+  color: #ffffff;
+  margin-top: 40px;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 1rem;
+}

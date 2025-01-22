@@ -1,0 +1,62 @@
+<form (ngSubmit)="agregarUsuario()" class="usuario-form">
+    <h2>Agregar Nuevo Usuario</h2>
+    
+    <!-- Cédula -->
+    <div class="input-group">
+      <label for="cedula">Cédula:</label>
+      <input
+        id="cedula"
+        type="text"
+        [(ngModel)]="usuario.cedula"
+        name="cedula"
+        placeholder="Ingrese la cédula"
+        required
+        pattern="[0-9]*"
+        maxlength="10"
+      />
+    </div>
+  
+    <!-- Nombre -->
+    <div class="input-group">
+      <label for="nombre">Nombre:</label>
+      <input
+        id="nombre"
+        type="text"
+        [(ngModel)]="usuario.nombre"
+        name="nombre"
+        placeholder="Ingrese el nombre"
+        required
+      />
+    </div>
+  
+    <!-- Contraseña -->
+    <div class="input-group">
+      <label for="contraseña">Contraseña:</label>
+      <input
+        id="contraseña"
+        type="password"
+        [(ngModel)]="usuario['contraseña']"
+        name="contraseña"
+        placeholder="Ingrese una contraseña"
+        required
+      />
+    </div>
+  
+    <!-- Rol -->
+    <div class="input-group">
+      <label for="rol">Rol:</label>
+      <select [(ngModel)]="usuario.rol" name="rol" required>
+        <option value="" disabled>Seleccione un rol</option>
+        <option value="ADMIN">Administrador</option>
+        <option value="PROFESIONAL">Profesional</option>
+      </select>
+    </div>
+  
+    <!-- Estado (Predefinido como ACTIVO) -->
+    <div class="input-group">
+      <label>Estado: <strong>{{ usuario.estado }}</strong></label>
+    </div>
+  
+    <button type="submit" class="usuario-btn">Agregar Usuario</button>
+  </form>
+  

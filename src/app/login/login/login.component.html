@@ -1,0 +1,52 @@
+<div class="login-container">
+  <form (ngSubmit)="login()" class="login-form">
+    <h2>Iniciar Sesión</h2>
+    
+    <!-- Campo Cédula -->
+    <div class="input-group">
+      <label for="cedula">
+        <i class="fas fa-user"></i>
+      </label>
+      <input
+        id="cedula"
+        type="text"
+        [(ngModel)]="credentials.cedula"
+        name="cedula"
+        placeholder="Ingrese su cédula"
+        required
+        pattern="[0-9]*"
+        maxlength="10"
+      />
+    </div>
+
+    <!-- Campo Contraseña -->
+    <div class="input-group">
+      <label for="contraseña">
+        <i class="fas fa-lock"></i>
+      </label>
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        id="contraseña"
+        [(ngModel)]="credentials['contraseña']"
+        name="contraseña"
+        placeholder="Ingrese su contraseña"
+        required
+      />
+    </div>
+
+    <!-- Checkbox para mostrar contraseña -->
+    <div class="checkbox-group">
+      <label>
+        <input 
+          type="checkbox" 
+          (change)="togglePasswordVisibility()" 
+        />
+        Mostrar contraseña
+      </label>
+    </div>
+
+    <!-- Botón de inicio de sesión -->
+    <button type="submit" class="login-btn">Iniciar Sesión</button>
+
+  </form>
+</div>

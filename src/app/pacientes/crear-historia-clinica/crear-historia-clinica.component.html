@@ -1,0 +1,222 @@
+<h2 class="title">Registrar Historia Clínica</h2>
+
+<form class="form-container" (ngSubmit)="guardarHistoriaClinica()">
+  <!-- Paso 1: Datos Básicos -->
+  <div *ngIf="currentStep === 1">
+    <h3>Datos Básicos</h3>
+    <div class="form-group">
+      <label>Número de Ficha:</label>
+      <input type="text" [(ngModel)]="historiaClinica.numeroFicha" name="numeroFicha" disabled class="input-field">
+    </div>
+    <div class="form-group">
+      <label>Enfermedades Tratamiento:</label>
+      <input type="checkbox" [(ngModel)]="historiaClinica.enfermedadesTratamiento" name="enfermedadesTratamiento"
+        class="checkbox-field">
+    </div>
+    <div class="form-group">
+      <label>Descripción Enfermedades:</label>
+      <input type="text" [(ngModel)]="historiaClinica.descripcionEnfermedades" name="descripcionEnfermedades"
+        class="input-field">
+    </div>
+    <div class="form-group">
+      <label>Alergias:</label>
+      <input type="checkbox" [(ngModel)]="historiaClinica.alergias" name="alergias" class="checkbox-field">
+    </div>
+    <div class="form-group">
+      <label>Descripción Alergias:</label>
+      <input type="text" [(ngModel)]="historiaClinica.descripcionAlergias" name="descripcionAlergias"
+        class="input-field">
+    </div>
+    <div class="form-group">
+      <label>Intervenciones Quirúrgicas:</label>
+      <input type="checkbox" [(ngModel)]="historiaClinica.intervencionesQuirurgicas" name="intervencionesQuirurgicas"
+        class="checkbox-field">
+    </div>
+    <div class="form-group">
+      <label>Descripción Intervenciones:</label>
+      <input type="text" [(ngModel)]="historiaClinica.descripcionIntervenciones" name="descripcionIntervenciones"
+        class="input-field">
+    </div>
+    <div class="form-group">
+      <label>Tratamientos:</label>
+      <input type="text" [(ngModel)]="historiaClinica.tratamientos" name="tratamientos" class="input-field">
+    </div>
+  </div>
+
+  <!-- Paso 2: Historia Prenatal -->
+  <div *ngIf="currentStep === 2">
+    <h3>Historia Prenatal</h3>
+    <div class="form-group">
+      <label>Desarrollo Prenatal:</label>
+      <input type="text" [(ngModel)]="historiaClinica.desarrolloPrenatal" name="desarrolloPrenatal" class="input-field">
+    </div>
+    <div class="form-group">
+      <label>Embarazo Deseado:</label>
+      <input type="checkbox" [(ngModel)]="historiaClinica.embarazoDeseado" name="embarazoDeseado"
+        class="checkbox-field">
+    </div>
+    <div class="form-group">
+      <label>Control Embarazo:</label>
+      <input type="checkbox" [(ngModel)]="historiaClinica.controlEmbarazo" name="controlEmbarazo"
+        class="checkbox-field">
+    </div>
+    <div class="form-group">
+      <label>Enfermedades Madre:</label>
+      <input type="text" [(ngModel)]="historiaClinica.enfermedadesMadre" name="enfermedadesMadre" class="input-field">
+    </div>
+    <div class="form-group">
+      <label>Consumo Tóxico Madre:</label>
+      <input type="text" [(ngModel)]="historiaClinica.consumoToxicoMadre" name="consumoToxicoMadre" class="input-field">
+    </div>
+    <div class="form-group">
+      <label>Amenaza de Aborto:</label>
+      <input type="checkbox" [(ngModel)]="historiaClinica.amenazaAborto" name="amenazaAborto" class="checkbox-field">
+    </div>
+    <div class="form-group">
+      <label>Estado Emocional Madre:</label>
+      <input type="text" [(ngModel)]="historiaClinica.estadoEmocionalMadre" name="estadoEmocionalMadre"
+        class="input-field">
+    </div>
+  </div>
+
+  <!-- Paso 3: Historia Perinatal -->
+  <div *ngIf="currentStep === 3">
+    <h3>Historia Perinatal</h3>
+    <div class="form-group">
+      <label>Desarrollo Perinatal:</label>
+      <input type="text" [(ngModel)]="historiaClinica.desarrolloPerinatal" name="desarrolloPerinatal"
+        class="input-field">
+    </div>
+    <div class="form-group">
+      <label>Lugar de Nacimiento:</label>
+      <input type="text" [(ngModel)]="historiaClinica.lugarNacimiento" name="lugarNacimiento" class="input-field">
+    </div>
+    <div class="form-group">
+      <label>Duración del Embarazo:</label>
+      <input type="text" [(ngModel)]="historiaClinica.duracionEmbarazo" name="duracionEmbarazo" class="input-field">
+    </div>
+    <div class="form-group">
+      <label>Tipo de Parto:</label>
+      <input type="text" [(ngModel)]="historiaClinica.tipoParto" name="tipoParto" class="input-field">
+    </div>
+    <div class="form-group">
+      <label>Complicaciones del Parto:</label>
+      <input type="text" [(ngModel)]="historiaClinica.complicacionesParto" name="complicacionesParto"
+        class="input-field">
+    </div>
+  </div>
+
+  <!-- Paso 4: Desarrollo Posnatal -->
+  <div *ngIf="currentStep === 4">
+    <h3>Desarrollo Posnatal</h3>
+    <div class="form-group">
+      <label>Desarrollo Posnatal:</label>
+      <input type="text" [(ngModel)]="historiaClinica.desarrolloPosnatal" name="desarrolloPosnatal" class="input-field">
+    </div>
+    <div class="form-group">
+      <label>Habilidades Motoras:</label>
+      <input type="text" [(ngModel)]="historiaClinica.habilidadesMotoras" name="habilidadesMotoras" class="input-field">
+    </div>
+    <div class="form-group">
+      <label>Habilidades Lenguaje:</label>
+      <input type="text" [(ngModel)]="historiaClinica.habilidadesLenguaje" name="habilidadesLenguaje"
+        class="input-field">
+    </div>
+  </div>
+
+  <!-- Paso 5: Desarrollo Motor y del Lenguaje -->
+  <div *ngIf="currentStep === 5">
+    <h3>Desarrollo Motor y del Lenguaje</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Habilidad Motora</th>
+          <th>Edad</th>
+          <th>Habilidad de Lenguaje</th>
+          <th>Edad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Control Cefálico</td>
+          <td><input type="text" [(ngModel)]="historiaClinica.controlCefalico" name="controlCefalico"
+              class="input-field"></td>
+          <td>Balbuceo</td>
+          <td><input type="text" [(ngModel)]="historiaClinica.balbuceo" name="balbuceo" class="input-field"></td>
+        </tr>
+        <tr>
+          <td>Sedestación</td>
+          <td><input type="text" [(ngModel)]="historiaClinica.sedestacion" name="sedestacion" class="input-field"></td>
+          <td>Vocalización</td>
+          <td><input type="text" [(ngModel)]="historiaClinica.vocalizacion" name="vocalizacion" class="input-field">
+          </td>
+        </tr>
+        <tr>
+          <td>Bipedestación</td>
+          <td><input type="text" [(ngModel)]="historiaClinica.bipedestacion" name="bipedestacion" class="input-field">
+          </td>
+          <td>Juego Vocal</td>
+          <td><input type="text" [(ngModel)]="historiaClinica.juegoVocal" name="juegoVocal" class="input-field"></td>
+        </tr>
+        <tr>
+          <td>Gateo</td>
+          <td><input type="text" [(ngModel)]="historiaClinica.gateo" name="gateo" class="input-field"></td>
+          <td>Silabeo</td>
+          <td><input type="text" [(ngModel)]="historiaClinica.silabeo" name="silabeo" class="input-field"></td>
+        </tr>
+        <tr>
+          <td>Camina con Apoyo</td>
+          <td><input type="text" [(ngModel)]="historiaClinica.caminaConApoyo" name="caminaConApoyo" class="input-field">
+          </td>
+          <td>Primeras Palabras</td>
+          <td><input type="text" [(ngModel)]="historiaClinica.primerasPalabras" name="primerasPalabras"
+              class="input-field"></td>
+        </tr>
+        <tr>
+          <td>Camina Solo</td>
+          <td><input type="text" [(ngModel)]="historiaClinica.caminaSolo" name="caminaSolo" class="input-field"></td>
+          <td>Oraciones de Dos Palabras</td>
+          <td><input type="text" [(ngModel)]="historiaClinica.oracionesDosPalabras" name="oracionesDosPalabras"
+              class="input-field"></td>
+        </tr>
+        <tr>
+          <td>Sube Escaleras</td>
+          <td><input type="text" [(ngModel)]="historiaClinica.subeEscaleras" name="subeEscaleras" class="input-field">
+          </td>
+          <td>Oraciones de Tres Palabras</td>
+          <td><input type="text" [(ngModel)]="historiaClinica.oracionesTresPalabras" name="oracionesTresPalabras"
+              class="input-field"></td>
+        </tr>
+        <tr>
+          <td>Control de Esfínteres</td>
+          <td><input type="text" [(ngModel)]="historiaClinica.controlEsfinteres" name="controlEsfinteres"
+              class="input-field"></td>
+          <td>Formulación Lingüística Completa</td>
+          <td><input type="text" [(ngModel)]="historiaClinica.formulacionLinguisticaCompleta"
+              name="formulacionLinguisticaCompleta" class="input-field"></td>
+        </tr>
+        <tr>
+          <td>Salta</td>
+          <td><input type="text" [(ngModel)]="historiaClinica.salta" name="salta" class="input-field"></td>
+          <td>Número Total de Palabras</td>
+          <td><input type="text" [(ngModel)]="historiaClinica.numeroTotalPalabras" name="numeroTotalPalabras"
+              class="input-field"></td>
+        </tr>
+        <tr>
+          <td>Corre</td>
+          <td><input type="text" [(ngModel)]="historiaClinica.corre" name="corre" class="input-field"></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+ 
+  <!-- Navegación -->
+  <div class="form-actions">
+    <button type="button" class="btn btn-secondary" (click)="prevStep()" *ngIf="currentStep > 1">Anterior</button>
+    <button type="button" class="btn btn-secondary" (click)="nextStep()"
+      *ngIf="currentStep < totalSteps">Siguiente</button>
+    <button type="submit" class="btn btn-primary" *ngIf="currentStep === totalSteps">Guardar Historia Clínica</button>
+  </div>
+</form>

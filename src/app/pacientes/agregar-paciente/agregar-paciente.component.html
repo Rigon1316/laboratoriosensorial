@@ -1,0 +1,134 @@
+<h2 class="form-title">Registro de Paciente</h2>
+<form (ngSubmit)="guardarPaciente()" #pacienteForm="ngForm" class="form-container">
+  <!-- Información Básica -->
+  <fieldset>
+    <legend>Información Básica</legend>
+    <div class="form-group">
+      <label>Número de Ficha:</label>
+      <input type="number" name="numeroFicha" [(ngModel)]="paciente.numeroFicha" required />
+    </div>
+    <div class="form-group">
+      <label>Nombres y Apellidos:</label>
+      <input type="text" name="nombresApellidos" [(ngModel)]="paciente.nombresApellidos" required />
+    </div>
+    <div class="form-group">
+      <label>Lugar y Fecha de Nacimiento:</label>
+      <input type="text" name="lugarFechaNacimiento" [(ngModel)]="paciente.lugarFechaNacimiento" required />
+    </div>
+    <div class="form-group">
+      <label>Edad:</label>
+      <input type="number" name="edad" [(ngModel)]="paciente.edad" required />
+    </div>
+    <div class="form-group">
+      <label>Escolarizado:</label>
+      <select name="escolarizado" [(ngModel)]="paciente.escolarizado" required>
+        <option value="true">Sí</option>
+        <option value="false">No</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Institución Educativa:</label>
+      <input type="text" name="institucionEducativa" [(ngModel)]="paciente.institucionEducativa" required />
+    </div>
+    <div class="form-group">
+      <label>Nivel Educativo:</label>
+      <input type="text" name="nivelEducativo" [(ngModel)]="paciente.nivelEducativo" required />
+    </div>
+    <div class="form-group">
+      <label>Dirección Domiciliaria:</label>
+      <input type="text" name="direccionDomiciliaria" [(ngModel)]="paciente.direccionDomiciliaria" required />
+    </div>
+    <div class="form-group">
+      <label>Fecha de Entrevista:</label>
+      <input type="date" name="fechaEntrevista" [(ngModel)]="paciente.fechaEntrevista" required />
+    </div>
+  </fieldset>
+  <!-- Información de los Padres -->
+  <fieldset>
+    <legend>Información de los Padres</legend>
+    <div class="form-group">
+      <label>Nombre del Padre:</label>
+      <input type="text" name="nombrePadre" [(ngModel)]="paciente.nombrePadre" required />
+    </div>
+    <div class="form-group">
+      <label>Edad del Padre:</label>
+      <input type="number" name="edadPadre" [(ngModel)]="paciente.edadPadre" required />
+    </div>
+    <div class="form-group">
+      <label>Ocupación del Padre:</label>
+      <input type="text" name="ocupacionPadre" [(ngModel)]="paciente.ocupacionPadre" required />
+    </div>
+    <div class="form-group">
+      <label>Nombre de la Madre:</label>
+      <input type="text" name="nombreMadre" [(ngModel)]="paciente.nombreMadre" required />
+    </div>
+    <div class="form-group">
+      <label>Edad de la Madre:</label>
+      <input type="number" name="edadMadre" [(ngModel)]="paciente.edadMadre" required />
+    </div>
+    <div class="form-group">
+      <label>Ocupación de la Madre:</label>
+      <input type="text" name="ocupacionMadre" [(ngModel)]="paciente.ocupacionMadre" required />
+    </div>
+    <div class="form-group">
+      <label>Número de Hermanos:</label>
+      <input type="number" name="numeroHermanos" [(ngModel)]="paciente.numeroHermanos" required />
+    </div>
+  </fieldset>
+  <!-- Información Adicional -->
+  <fieldset>
+    <legend>Información Adicional</legend>
+    <div class="form-group">
+      <label>Comportamiento:</label>
+      <textarea name="comportamiento" [(ngModel)]="paciente.comportamiento" required></textarea>
+    </div>
+    <div class="form-group">
+      <label>Gustos:</label>
+      <textarea name="gustos" [(ngModel)]="paciente.gustos" required></textarea>
+    </div>
+    <div class="form-group">
+      <label>Disgustos:</label>
+      <textarea name="disgustos" [(ngModel)]="paciente.disgustos" required></textarea>
+    </div>
+    <div class="form-group">
+      <label>Ambientes Tranquilos:</label>
+      <select name="ambientesTranquilos" [(ngModel)]="paciente.ambientesTranquilos" required>
+        <option value="true">Sí</option>
+        <option value="false">No</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Ambientes Tranquilos:</label>
+      <select name="ambientesTranquilos" [(ngModel)]="paciente.ambientesTranquilos" required>
+        <option value="true">Sí</option>
+        <option value="false">No</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Sensibilidad a la Estimulación:</label>
+      <select name="sensibilidadEstimulacion" [(ngModel)]="paciente.sensibilidadEstimulacion" required>
+        <option value="true">Sí</option>
+        <option value="false">No</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Distracción por Ruidos:</label>
+      <select name="distraccionRuidos" [(ngModel)]="paciente.distraccionRuidos" required>
+        <option value="true">Sí</option>
+        <option value="false">No</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Separación de la Madre:</label>
+      <select name="separacionMadre" [(ngModel)]="paciente.separacionMadre" required>
+        <option value="true">Sí</option>
+        <option value="false">No</option>
+      </select>
+    </div>
+  </fieldset>
+
+  <div class="form-actions">
+    <button type="submit" [disabled]="!pacienteForm.valid">Guardar Paciente</button>
+    <button type="button" (click)="cancelar()">Cancelar</button>
+  </div>
+</form>

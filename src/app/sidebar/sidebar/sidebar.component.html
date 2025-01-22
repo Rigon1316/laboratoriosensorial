@@ -1,0 +1,45 @@
+<ul>
+  <!-- Botón Inicio -->
+  <li>
+    <a (click)="navigateTo('/home')">Inicio</a>
+  </li>
+
+  <!-- Botón Iniciar Sesión (Visible solo si no está autenticado) -->
+  <li *ngIf="!isAuthenticated">
+    <a (click)="navigateTo('/login')">Iniciar Sesión</a>
+  </li>
+
+  <!-- Opciones visibles solo si está autenticado -->
+  <ng-container *ngIf="isAuthenticated">
+    <!-- Opciones solo para ADMIN -->
+    <li *ngIf="isAdmin">
+      <a (click)="navigateTo('/usuarios/agregar')">Agregar Profesional</a>
+    </li>
+    <li *ngIf="isAdmin">
+      <a (click)="navigateTo('/usuarios/listar')">Listar Profesionales</a>
+    </li>
+    <li *ngIf="isAdmin">
+      <a (click)="navigateTo('/pacientes/agregar')">Agregar Pacientes</a>
+    </li>
+    <li *ngIf="isAuthenticated">
+      <a (click)="navigateTo('/pacientes/listar')">Listar Pacientes</a>
+    </li>
+    <li *ngIf="isAdmin">
+      <a (click)="navigateTo('/asignaciones/agregar')">Agregar Asignación</a>
+    </li>
+
+    <!-- Nueva opción para listar asignaciones -->
+    <li *ngIf="isAuthenticated">
+      <a (click)="navigateTo('/asignaciones/listar')">Listar Asignaciones</a>
+    </li>
+    <li *ngIf="isAuthenticated">
+      <a (click)="navigateTo('/seguimientos')">Crear Seguimiento</a>
+    </li>
+    
+
+    <!-- Botón Cerrar Sesión -->
+    <li>
+      <a (click)="logout()">Cerrar Sesión</a>
+    </li>
+  </ng-container>
+</ul>

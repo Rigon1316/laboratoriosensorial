@@ -1,0 +1,37 @@
+<h2>Lista de Usuarios</h2>
+
+<!-- Buscar usuarios -->
+<div class="search-container">
+  <input
+    type="text"
+    [(ngModel)]="filtro"
+    (input)="filtrarUsuarios()"
+    placeholder="Buscar usuarios..."
+    class="search-input"
+  />
+</div>
+
+<!-- Mostrar mensaje de error si algo falla -->
+<div *ngIf="error" class="error">
+  {{ error }}
+</div>
+
+<div *ngIf="usuariosFiltrados.length > 0">
+  <app-table
+  [data]="usuariosFiltrados"
+  [columns]="[
+    { header: 'ID', key: 'id' },
+    { header: 'Cedula', key: 'cedula' },
+    { header: 'Nombre', key: 'nombre' },
+    { header: 'Rol', key: 'rol' },
+    { header: 'Estado', key: 'estado' }
+  ]"
+    [showDelete]="true"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 20]"
+    (onDelete)="eliminarUsuario($event, $event)"
+  />
+  </div>
+
+<!-- Mensaje si no hay usuarios -->
+<p *ngIf="usuariosFiltrados.length === 0 && !error">No hay usuarios disponibles.</p>

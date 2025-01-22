@@ -1,0 +1,74 @@
+/* Estilo General */
+.login-form {
+    width: 350px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .login-form h2 {
+    margin-bottom: 20px;
+    color: #d90429;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Estilo Checkbox y Label Alineado */
+  .checkbox-group {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espacio entre el checkbox y el label */
+    font-size: 14px;
+  }
+  
+  .checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: normal;
+    cursor: pointer;
+  }
+  
+  .checkbox-group input[type="checkbox"] {
+    margin: 0;
+  }
+  
+  /* Botón de Inicio de Sesión */
+  .login-btn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background-color: #d90429;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .login-btn:hover {
+    background: linear-gradient(150deg, #E74C3C, #F5B7B1);
+  }
+  
